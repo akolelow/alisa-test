@@ -1,9 +1,15 @@
-import sys
+from flask import Flask
+import os
 
-for line in sys.stdin:
-    line = line.strip().split()
-    ans = []
-    for i in range(1, len(line) - 1):
-        if line[i] > line[0] and len(line[i]) <= len(line[-1]):
-            ans.append(line[i])
-    print(' & '.join(ans))
+app = Flask(__name__)
+
+
+@app.route('/')
+@app.route('/index')
+def index():
+    return "Привет, Яндекс!"
+
+
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
